@@ -1,0 +1,43 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="Calculator.Tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="Calculator.Tests" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="CalcTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Calculator.Tests.CalcTests.Sum_all_ok" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_all_ok(a: 0, b: 0, exp: 0)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_all_ok(a: 1, b: 2, exp: 3)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_all_ok(a: 230, b: 140, exp: 370)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_all_ok(a: -23, b: -14, exp: -37)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_all_ok(a: -20, b: 40, exp: 20)" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Calculator.Tests.CalcTests.Sum_overflow_throws_OverFlowException" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_overflow_throws_OverFlowException(a: 2147483647, b: 1)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_overflow_throws_OverFlowException(a: 1, b: 2147483647)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_overflow_throws_OverFlowException(a: -2147483648, b: -1)" />
+                        <Property Name="DisplayName" Value="Calculator.Tests.CalcTests.Sum_overflow_throws_OverFlowException(a: -1, b: -2147483648)" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>
