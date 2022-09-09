@@ -4,25 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stammdatenverwaltung.UI.WPF"
-        mc:Ignorable="d"
+        mc:Ignorable="d" DataContext="{Binding Mode=OneWay,RelativeSource={RelativeSource Self}}"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
-
         <WrapPanel DockPanel.Dock="Top">
-            <Button>Laden</Button>
-            <Button>Speichern</Button>
-            <Button>Neu</Button>
+            <Button Click="Button_Click_1">Laden</Button>
+            <Button Click="Button_Click_2">Speichern</Button>
+            <Button Click="Button_Click">Neu</Button>
             <Button>Löschen</Button>
         </WrapPanel>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="111*"/>
                 <ColumnDefinition Width="2"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="133*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid />
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
-            <Grid Grid.Column="2">
+            <DataGrid ItemsSource="{Binding MitarbeiterList}" 
+                      SelectedItem="{Binding SelectedMitarbeiter}"
+                      Grid.ColumnSpan="2" />
+            <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
@@ -35,16 +37,17 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label>Name</Label>
-                <TextBox Grid.Column="1"/>
+                <TextBox Grid.Column="1" Text="{Binding SelectedMitarbeiter.Name}"/>
                 <Label Grid.Row="1">GebDatum</Label>
-                <DatePicker Grid.Column="1" Grid.Row="1"/>
+                <DatePicker Grid.Column="1" Grid.Row="1" SelectedDate="{Binding SelectedMitarbeiter.GebDatum}"/>
                 <Label Grid.Row="2">Beruf</Label>
-                <TextBox Grid.Column="1" Grid.Row="2"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedMitarbeiter.Beruf}"/>
                 <GroupBox Header="Abteilungen" Grid.Row="3" Grid.ColumnSpan="2">
-                    <ListBox/>
+                    <ListBox ItemsSource="{Binding SelectedMitarbeiter.Abteilungen}"
+                             DisplayMemberPath="Bezeichnung"/>
                 </GroupBox>
                 <GroupBox Header="Kunden" Grid.Row="4" Grid.ColumnSpan="2">
-                    <ListBox/>
+                    <DataGrid ItemsSource="{Binding SelectedMitarbeiter.Kunden}"/>
                 </GroupBox>
             </Grid>
         </Grid>
