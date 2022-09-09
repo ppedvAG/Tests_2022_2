@@ -20,7 +20,8 @@
                 <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="133*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid ItemsSource="{Binding MitarbeiterList}" 
+            <DataGrid AutomationProperties.AutomationId="myGrid"
+                      ItemsSource="{Binding MitarbeiterList}" 
                       SelectedItem="{Binding SelectedMitarbeiter}"
                       Grid.ColumnSpan="2" />
             <GridSplitter Grid.Column="2" HorizontalAlignment="Stretch"/>
@@ -37,7 +38,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label>Name</Label>
-                <TextBox Grid.Column="1" Text="{Binding SelectedMitarbeiter.Name}"/>
+                <TextBox AutomationProperties.AutomationId="nameTb" Grid.Column="1" Text="{Binding SelectedMitarbeiter.Name}"/>
                 <Label Grid.Row="1">GebDatum</Label>
                 <DatePicker Grid.Column="1" Grid.Row="1" SelectedDate="{Binding SelectedMitarbeiter.GebDatum}"/>
                 <Label Grid.Row="2">Beruf</Label>
