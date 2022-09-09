@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Stammdatenverwaltung.Data.Model
+namespace Stammdatenverwaltung.Model
 {
     public abstract class Person : Entity
     {

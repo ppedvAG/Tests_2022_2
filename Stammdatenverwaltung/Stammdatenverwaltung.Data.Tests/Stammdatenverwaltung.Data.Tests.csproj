@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Stammdatenverwaltung.Data\Stammdatenverwaltung.Data.csproj" />
+    <ProjectReference Include="..\Stammdatenverwaltung.Model\Stammdatenverwaltung.Model.csproj" />
   </ItemGroup>
 
 </Project>

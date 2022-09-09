@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Stammdatenverwaltung.Model\Stammdatenverwaltung.Model.csproj" />
+  </ItemGroup>
+
 </Project>

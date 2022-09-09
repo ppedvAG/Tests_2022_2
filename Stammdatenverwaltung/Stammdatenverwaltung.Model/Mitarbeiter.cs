@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Stammdatenverwaltung.Data.Model
+namespace Stammdatenverwaltung.Model
 {
     public class Mitarbeiter : Person
     {

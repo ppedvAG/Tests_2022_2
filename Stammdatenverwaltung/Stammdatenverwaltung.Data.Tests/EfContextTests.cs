@@ -1,7 +1,7 @@
 using AutoFixture;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Stammdatenverwaltung.Data.Model;
+using Stammdatenverwaltung.Model;
 using System;
 using Xunit;
 
