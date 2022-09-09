@@ -1,5 +1,6 @@
 using AutoFixture;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Stammdatenverwaltung.Data.Model;
 using System;
 using Xunit;
@@ -9,6 +10,7 @@ namespace Stammdatenverwaltung.Data.Tests
     public class EfContextTests
     {
         [Fact]
+        [Trait("Category", "Integration")]
         public void New_context_should_create_new_db_if_not_exists()
         {
             var testConString = "Data Source=CreateTest.db;";
@@ -21,6 +23,7 @@ namespace Stammdatenverwaltung.Data.Tests
         }
 
         [Fact]
+        [Trait("Category", "Integration")]
         public void Can_add_new_Mitarbeitert_to_db()
         {
             var m = new Mitarbeiter { Name = $"Fred_{Guid.NewGuid()}" };
@@ -39,6 +42,7 @@ namespace Stammdatenverwaltung.Data.Tests
         }
 
         [Fact]
+        [Trait("Category", "Integration")]
         public void Can_update_Mitarbeitert()
         {
             var m = new Mitarbeiter { Name = $"Fred_{Guid.NewGuid()}" };
@@ -65,6 +69,7 @@ namespace Stammdatenverwaltung.Data.Tests
 
 
         [Fact]
+        [Trait("Category", "Integration")]
         public void Can_delete_Mitarbeitert()
         {
             var m = new Mitarbeiter { Name = $"Fred_{Guid.NewGuid()}" };
@@ -77,7 +82,6 @@ namespace Stammdatenverwaltung.Data.Tests
             using (var con = new EfContext())
             {
                 var loaded = con.Mitarbeiter.Find(m.Id);
-                //Assert.NotNull(loaded);
                 loaded.Should().NotBeNull();
                 con.Remove(loaded);
                 con.SaveChanges();
@@ -86,7 +90,6 @@ namespace Stammdatenverwaltung.Data.Tests
             using (var con = new EfContext())
             {
                 var loaded = con.Mitarbeiter.Find(m.Id);
-                //Assert.Null(loaded);
                 loaded.Should().BeNull();
             }
         }
@@ -94,6 +97,7 @@ namespace Stammdatenverwaltung.Data.Tests
 
 
         [Fact]
+        [Trait("Category", "Integration")]
         public void Can_add_new_Mitarbeitert_to_db_AutoFix()
         {
             var fix = new Fixture();
@@ -113,5 +117,60 @@ namespace Stammdatenverwaltung.Data.Tests
                 loaded.Should().BeEquivalentTo(m, c => c.IgnoringCyclicReferences());
             }
         }
+
+
+        [Fact]
+        [Trait("Category", "Integration")]
+        public void Delete_Kunde_is_always_possible_even_a_Mitarbeitert_is_Ansprechpartner()
+        {
+            var m = new Mitarbeiter() { Name = "Don't kill me" };
+            var k = new Kunde() { Name = "Kill me" };
+            m.Kunden.Add(k);
+
+            using (var con = new EfContext())
+            {
+                con.Add(m);
+                con.Add(k);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext())
+            {
+                var loaded = con.Kunden.Find(k.Id);
+                con.Remove(loaded);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext())
+            {
+                con.Kunden.Find(k.Id).Should().BeNull();
+                con.Mitarbeiter.Find(m.Id).Should().NotBeNull();
+            }
+        }
+
+        [Fact]
+        [Trait("Category","Integration")]
+        public void Delete_Mitarbeiter_with_Ansprechpartner_throws_DbUpdateException()
+        {
+            var m = new Mitarbeiter() { Name = "kill me" };
+            var k = new Kunde() { Name = "Don't Kill me" };
+            m.Kunden.Add(k);
+
+            using (var con = new EfContext())
+            {
+                con.Add(m);
+                con.Add(k);
+                con.SaveChanges();
+            }
+
+            using (var con = new EfContext())
+            {
+                var loaded = con.Mitarbeiter.Find(m.Id);
+                con.Remove(loaded);
+                var act = new Action(() => con.SaveChanges());
+                act.Should().Throw<DbUpdateException>();
+            }
+        }
+
     }
 }
