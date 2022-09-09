@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stammdatenverwaltung.Logic"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stammdatenverwaltung.Logic.Tests", "Stammdatenverwaltung.Logic.Tests\Stammdatenverwaltung.Logic.Tests.csproj", "{234CC771-70EB-47D3-92E0-5C905683F8E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stammdatenverwaltung.UI.WPF", "Stammdatenverwaltung.UI.WPF\Stammdatenverwaltung.UI.WPF.csproj", "{DE099366-9C3C-438A-B94C-1F663392E3F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{234CC771-70EB-47D3-92E0-5C905683F8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{234CC771-70EB-47D3-92E0-5C905683F8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{234CC771-70EB-47D3-92E0-5C905683F8E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE099366-9C3C-438A-B94C-1F663392E3F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE099366-9C3C-438A-B94C-1F663392E3F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE099366-9C3C-438A-B94C-1F663392E3F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE099366-9C3C-438A-B94C-1F663392E3F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

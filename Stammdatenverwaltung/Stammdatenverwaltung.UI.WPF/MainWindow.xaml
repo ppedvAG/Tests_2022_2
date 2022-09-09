@@ -1,0 +1,52 @@
+﻿<Window x:Class="Stammdatenverwaltung.UI.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stammdatenverwaltung.UI.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+
+        <WrapPanel DockPanel.Dock="Top">
+            <Button>Laden</Button>
+            <Button>Speichern</Button>
+            <Button>Neu</Button>
+            <Button>Löschen</Button>
+        </WrapPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid />
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label>Name</Label>
+                <TextBox Grid.Column="1"/>
+                <Label Grid.Row="1">GebDatum</Label>
+                <DatePicker Grid.Column="1" Grid.Row="1"/>
+                <Label Grid.Row="2">Beruf</Label>
+                <TextBox Grid.Column="1" Grid.Row="2"/>
+                <GroupBox Header="Abteilungen" Grid.Row="3" Grid.ColumnSpan="2">
+                    <ListBox/>
+                </GroupBox>
+                <GroupBox Header="Kunden" Grid.Row="4" Grid.ColumnSpan="2">
+                    <ListBox/>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
