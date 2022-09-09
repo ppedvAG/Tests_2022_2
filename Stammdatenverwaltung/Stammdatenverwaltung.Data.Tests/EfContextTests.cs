@@ -1,10 +1,7 @@
 using AutoFixture;
-using AutoFixture.Kernel;
+using FluentAssertions;
 using Stammdatenverwaltung.Data.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Xunit;
 
 namespace Stammdatenverwaltung.Data.Tests
@@ -80,7 +77,8 @@ namespace Stammdatenverwaltung.Data.Tests
             using (var con = new EfContext())
             {
                 var loaded = con.Mitarbeiter.Find(m.Id);
-                Assert.NotNull(loaded);
+                //Assert.NotNull(loaded);
+                loaded.Should().NotBeNull();
                 con.Remove(loaded);
                 con.SaveChanges();
             }
@@ -88,7 +86,8 @@ namespace Stammdatenverwaltung.Data.Tests
             using (var con = new EfContext())
             {
                 var loaded = con.Mitarbeiter.Find(m.Id);
-                Assert.Null(loaded);
+                //Assert.Null(loaded);
+                loaded.Should().BeNull();
             }
         }
 
@@ -111,28 +110,8 @@ namespace Stammdatenverwaltung.Data.Tests
             using (var con = new EfContext())
             {
                 var loaded = con.Mitarbeiter.Find(m.Id);
-                Assert.Equal(m.Name, loaded.Name);
+                loaded.Should().BeEquivalentTo(m, c => c.IgnoringCyclicReferences());
             }
         }
-
-        internal class PropertyNameOmitter : ISpecimenBuilder
-        {
-            private readonly IEnumerable<string> names;
-
-            internal PropertyNameOmitter(params string[] names)
-            {
-                this.names = names;
-            }
-
-            public object Create(object request, ISpecimenContext context)
-            {
-                var propInfo = request as PropertyInfo;
-                if (propInfo != null && names.Contains(propInfo.Name))
-                    return new OmitSpecimen();
-
-                return new NoSpecimen();
-            }
-        }
-
     }
 }
